@@ -1,37 +1,30 @@
-import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    OneToMany,
-    ManyToMany,
-    UpdateDateColumn,
-    CreateDateColumn
-} from 'typeorm';
+import {BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table} from 'sequelize-typescript';
+import {UserProject} from "./user-project-model";
+import {Projects} from "../projects/projects-model";
 
+@Table({tableName: 'users'})
+export class Users extends Model {
 
-@Entity({ name: 'users' })
-export class UserModel {
-    @PrimaryGeneratedColumn()
+    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey:true})
     id: number;
 
-    @Column({ unique: true })
+    @Column({type: DataType.STRING, unique: true, allowNull:false})
     email: string;
 
-    @Column()
+    @Column({type: DataType.STRING})
     password: string;
 
-    @Column({default: 'USER'})
+    @Column({type: DataType.STRING})
     role: string;
 
-    @Column({
-        type: 'jsonb'
-    })
+    @Column({type: DataType.JSONB})
     details: Record<string, any>;
 
-    @CreateDateColumn({ type: 'timestamp' })
-    public createdAt!: Date;
+    @HasMany(() => Projects)
+    projects: Projects[]
 
-    @UpdateDateColumn({ type: 'timestamp' })
-    public updatedAt!: Date;
+    // @BelongsToMany(()=> Projects,()=>UserProject)
+    // projects: Projects[]
 
 }
+

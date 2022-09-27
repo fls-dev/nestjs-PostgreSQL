@@ -10,13 +10,15 @@ exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
-const typeorm_1 = require("@nestjs/typeorm");
+const sequelize_1 = require("@nestjs/sequelize");
 const user_model_1 = require("./user-model");
+const projects_model_1 = require("../projects/projects-model");
+const user_project_model_1 = require("./user-project-model");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_model_1.UserModel])],
+        imports: [sequelize_1.SequelizeModule.forFeature([user_model_1.Users, projects_model_1.Projects, user_project_model_1.UserProject])],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService]
     })

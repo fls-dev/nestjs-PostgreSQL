@@ -14,24 +14,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
+const sequelize_1 = require("@nestjs/sequelize");
 const user_model_1 = require("./user-model");
 let UsersService = class UsersService {
-    constructor(UserRepository) {
-        this.UserRepository = UserRepository;
+    constructor(users) {
+        this.users = users;
     }
     async createUser(body) {
-        return await this.UserRepository.save(body);
+        return await this.users.create(body);
     }
     async findAll() {
-        return await this.UserRepository.find();
+        return await this.users.findAll({ include: 'participants' });
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(user_model_1.UserModel)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(0, (0, sequelize_1.InjectModel)(user_model_1.Users)),
+    __metadata("design:paramtypes", [Object])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map
