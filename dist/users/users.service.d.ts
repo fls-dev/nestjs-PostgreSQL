@@ -1,7 +1,11 @@
-import { Users } from "./user-model";
+import { Repository } from "typeorm";
+import { Users } from "./user.entity";
 export declare class UsersService {
-    private users;
-    constructor(users: typeof Users);
-    createUser(body: any): Promise<Users>;
+    readonly users: Repository<Users>;
+    constructor(users: Repository<Users>);
     findAll(): Promise<Users[]>;
+    createUser(body: any): Promise<{
+        status: boolean;
+        user: any;
+    }>;
 }

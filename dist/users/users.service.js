@@ -14,23 +14,33 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const sequelize_1 = require("@nestjs/sequelize");
-const user_model_1 = require("./user-model");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const bcrypt = require("bcryptjs");
+const user_entity_1 = require("./user.entity");
 let UsersService = class UsersService {
     constructor(users) {
         this.users = users;
     }
-    async createUser(body) {
-        return await this.users.create(body);
-    }
     async findAll() {
-        return await this.users.findAll({ include: 'participants' });
+        return await this.users.find();
+    }
+    async createUser(body) {
+        const candidate = await this.users.findOne({ where: { email: body.email } });
+        if (!candidate) {
+            const hashPassword = await bcrypt.hash(body.password, 9);
+            const createdUser = await this.users.save(Object.assign(Object.assign({}, body), { password: hashPassword }));
+            return { status: true, user: createdUser };
+        }
+        else {
+            throw new common_1.HttpException('Пользователь с таким Email уже существует', common_1.HttpStatus.BAD_REQUEST);
+        }
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, sequelize_1.InjectModel)(user_model_1.Users)),
-    __metadata("design:paramtypes", [Object])
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.Users)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

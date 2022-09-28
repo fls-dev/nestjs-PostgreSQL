@@ -1,25 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import {Projects} from "./projects-model";
-import {InjectModel} from "@nestjs/sequelize";
-import {Users} from "../users/user-model";
-import {UserProject} from "../users/user-project-model";
+import {InjectRepository} from "@nestjs/typeorm";
+import {ArrayContains, In, Repository} from "typeorm";
+import {Projects} from "./project.entity";
+import {Users} from "../users/user.entity";
 
 @Injectable()
 export class ProjectsService {
-    constructor(@InjectModel(Projects) private projects: typeof Projects,
-                @InjectModel(Users) private users: typeof Users,
-                @InjectModel(UserProject) private userProject: typeof UserProject) {
-    }
+    constructor(@InjectRepository(Projects)
+                public readonly projects: Repository<Projects>,
+                @InjectRepository(Users)
+                public readonly user: Repository<Users>
+
+    ) {}
 
 
     async createProject(body){
-        const user = await this.users.findOne({ where: { id: body.createdUserId } });
-        const project = await this.projects.create(body);
-
-
+        const project = await this.projects.save(body);
         return {status:'save', project}
     }
+
+
+
     async getAllProjects() {
-        return this.projects.findAll({include:{all:true}})
+       let projects = await this.projects.find()
+        for (const project of projects) {
+            let usersArray = []
+           let us = await this.user.findBy({
+                // @ts-ignore
+                id: In(project.users)
+            })
+            usersArray.push(us)
+            project.users = usersArray
+        }
+        return projects
     }
 }
