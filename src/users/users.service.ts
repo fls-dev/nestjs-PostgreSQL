@@ -10,8 +10,6 @@ export class UsersService {
                 public readonly users: Repository<Users>) {
     }
 
-
-
     async findAll() {
         return await this.users.find()
     }
