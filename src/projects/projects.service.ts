@@ -20,12 +20,11 @@ export class ProjectsService {
     }
 
 
-
-    async getAllProjects() {
-       let projects = await this.projects.find()
+    async userProjects(id) {
+        let projects = await this.projects.find({where: {id: id}, relations: {createdUserId: true}, cache: true})
         for (const project of projects) {
             let usersArray = []
-           let us = await this.user.findBy({
+            let us = await this.user.findOneBy({
                 // @ts-ignore
                 id: In(project.users)
             })

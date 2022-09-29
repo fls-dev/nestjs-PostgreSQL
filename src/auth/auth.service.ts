@@ -22,8 +22,7 @@ export class AuthService {
                 const payload = {id:findUser.id}
                 return{
                     status: true,
-                    userId: findUser.id,
-                    role: findUser.role,
+                    user: findUser,
                     token: this.JwtService.sign(payload,{expiresIn:'24h'})
                 }
             }else throw new UnauthorizedException({status: false, message:'no correct password'})

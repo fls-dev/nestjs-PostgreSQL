@@ -9,6 +9,7 @@ export class Projects {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ManyToOne(() => Users, (user) => user.id)
     @Column()
     createdUserId: number;
 
@@ -33,6 +34,14 @@ export class Projects {
         nullable: false,
     })
     files: Record<string, any>;
+
+    @Column({
+        type: 'jsonb',
+        array: false,
+        default: () => "'[]'",
+        nullable: false,
+    })
+    tasks: Record<string, any>;
 
     @Column({
         type: 'jsonb',

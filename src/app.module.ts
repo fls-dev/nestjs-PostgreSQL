@@ -7,10 +7,12 @@ import { ProjectsModule } from './projects/projects.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import {Users} from "./users/user.entity";
 import {Projects} from "./projects/project.entity";
-// import {ProjectUser} from "./entities/project-user.entity";
 import { AuthModule } from './auth/auth.module';
-import {JwtAuthGuard} from "./auth/jwt-auth.guard";
 import {JwtModule} from "@nestjs/jwt";
+import {ConfigModule} from "@nestjs/config";
+import {ServeStaticModule} from "@nestjs/serve-static";
+import { join } from 'path';
+
 
 @Module({
   imports: [
@@ -31,6 +33,12 @@ import {JwtModule} from "@nestjs/jwt";
       ssl: {
         rejectUnauthorized: false
       },
+    }),
+    ConfigModule.forRoot({
+      envFilePath: '.secret.env',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
     }),
     UsersModule,
     ProjectsModule,

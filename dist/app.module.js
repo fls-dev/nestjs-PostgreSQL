@@ -17,6 +17,9 @@ const user_entity_1 = require("./users/user.entity");
 const project_entity_1 = require("./projects/project.entity");
 const auth_module_1 = require("./auth/auth.module");
 const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -39,6 +42,12 @@ AppModule = __decorate([
                 ssl: {
                     rejectUnauthorized: false
                 },
+            }),
+            config_1.ConfigModule.forRoot({
+                envFilePath: '.secret.env',
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'static'),
             }),
             users_module_1.UsersModule,
             projects_module_1.ProjectsModule,
