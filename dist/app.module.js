@@ -20,21 +20,22 @@ const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
+const session_control_entity_1 = require("./auth/session-control.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                url: "postgres://auvqxfggcijkft:9a6aa9f5e9a822fbb69702b6984161272915b71babf15127a6a4da28f8d63199@ec2-34-247-72-29.eu-west-1.compute.amazonaws.com:5432/dbkos2nh8rb4hu",
+                url: "postgres://evyevihhsiroyx:a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d@ec2-54-75-102-122.eu-west-1.compute.amazonaws.com:5432/d7q90pks25m0i6",
                 type: 'postgres',
-                host: 'ec2-34-247-72-29.eu-west-1.compute.amazonaws.com',
+                host: 'ec2-54-75-102-122.eu-west-1.compute.amazonaws.com',
                 port: 5432,
-                username: 'auvqxfggcijkft',
-                password: '9a6aa9f5e9a822fbb69702b6984161272915b71babf15127a6a4da28f8d63199',
-                database: 'dbkos2nh8rb4hu',
+                username: 'evyevihhsiroyx',
+                password: 'a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d',
+                database: 'd7q90pks25m0i6',
                 entities: [
-                    user_entity_1.Users, project_entity_1.Projects
+                    user_entity_1.Users, project_entity_1.Projects, session_control_entity_1.SessionControl
                 ],
                 synchronize: true,
                 logging: false,
@@ -45,6 +46,7 @@ AppModule = __decorate([
             }),
             config_1.ConfigModule.forRoot({
                 envFilePath: '.secret.env',
+                isGlobal: true,
             }),
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: (0, path_1.join)(__dirname, '..', 'static'),

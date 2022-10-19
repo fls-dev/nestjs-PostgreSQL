@@ -6,7 +6,6 @@ import rateLimit from "express-rate-limit";
 import * as cookieParser from 'cookie-parser';
 import { join } from 'path';
 
-
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
       AppModule,

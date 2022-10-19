@@ -22,6 +22,9 @@ let UsersController = class UsersController {
     async getUsers() {
         return await this.UserService.findAll();
     }
+    getInfoUser(id) {
+        return this.UserService.getIndoForUser(id);
+    }
     createUser(body) {
         return this.UserService.createUser(body);
     }
@@ -32,6 +35,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getUsers", null);
+__decorate([
+    (0, common_1.Get)('get-info/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "getInfoUser", null);
 __decorate([
     (0, common_1.Post)('/create'),
     __param(0, (0, common_1.Body)()),

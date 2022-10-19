@@ -13,6 +13,13 @@ export class UsersService {
     async findAll() {
         return await this.users.find()
     }
+    // async findAll() {
+    //     return await this.users.find()
+    // }
+
+    async getIndoForUser(id){
+        return await this.users.findOneById(id)
+    }
 
     async createUser(body) {
         const candidate = await this.users.findOne({where:{email:body.email}})
