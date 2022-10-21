@@ -27,22 +27,18 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                url: "postgres://evyevihhsiroyx:a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d@ec2-54-75-102-122.eu-west-1.compute.amazonaws.com:5432/d7q90pks25m0i6",
                 type: 'postgres',
-                host: 'ec2-54-75-102-122.eu-west-1.compute.amazonaws.com',
+                host: 'serwer2068433.home.pl',
                 port: 5432,
-                username: 'evyevihhsiroyx',
-                password: 'a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d',
-                database: 'd7q90pks25m0i6',
+                username: '33667244_postgre_nestjs',
+                password: 'ElGhh6p4IUqwx_M8',
+                database: '33667244_postgre_nestjs',
                 entities: [
                     user_entity_1.Users, project_entity_1.Projects, session_control_entity_1.SessionControl
                 ],
                 synchronize: true,
                 logging: false,
                 autoLoadEntities: true,
-                ssl: {
-                    rejectUnauthorized: false
-                },
             }),
             config_1.ConfigModule.forRoot({
                 envFilePath: '.secret.env',

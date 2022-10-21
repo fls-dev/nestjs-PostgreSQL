@@ -19,22 +19,18 @@ import {SessionControl} from "./auth/session-control.entity";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      url:"postgres://evyevihhsiroyx:a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d@ec2-54-75-102-122.eu-west-1.compute.amazonaws.com:5432/d7q90pks25m0i6",
       type: 'postgres',
-      host: 'ec2-54-75-102-122.eu-west-1.compute.amazonaws.com',
+      host: 'serwer2068433.home.pl',
       port: 5432,
-      username: 'evyevihhsiroyx',
-      password: 'a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d',
-      database: 'd7q90pks25m0i6',
+      username: '33667244_postgre_nestjs',
+      password: 'ElGhh6p4IUqwx_M8',
+      database: '33667244_postgre_nestjs',
       entities: [
         Users, Projects,SessionControl
       ],
       synchronize: true,
       logging: false,
       autoLoadEntities: true,
-      ssl: {
-        rejectUnauthorized: false
-      },
     }),
     ConfigModule.forRoot({
       envFilePath: '.secret.env',
@@ -53,38 +49,22 @@ import {SessionControl} from "./auth/session-control.entity";
 })
 export class AppModule {}
 
- // TypeOrmModule.forRoot({
- //      url:"postgres://auvqxfggcijkft:9a6aa9f5e9a822fbb69702b6984161272915b71babf15127a6a4da28f8d63199@ec2-34-247-72-29.eu-west-1.compute.amazonaws.com:5432/dbkos2nh8rb4hu",
- //      type: 'postgres',
- //      host: 'ec2-34-247-72-29.eu-west-1.compute.amazonaws.com',
- //      port: 5432,
- //      username: 'auvqxfggcijkft',
- //      password: '9a6aa9f5e9a822fbb69702b6984161272915b71babf15127a6a4da28f8d63199',
- //      database: 'dbkos2nh8rb4hu',
- //      entities: [__dirname + "/../**/*.entity{.ts,.js}"],
- //      synchronize: true,
- //      logging: false,
- //      autoLoadEntities: true,
- //      ssl: {
- //        rejectUnauthorized: false
- //      },
- //    }),
 
-// se
-// SequelizeModule.forRoot({
-//   dialect: 'postgres',
-//   dialectOptions: {
-//     ssl: {
-//       require: false,
-//       rejectUnauthorized: false,
-//     },
-//   },
-//   host: 'ec2-34-247-72-29.eu-west-1.compute.amazonaws.com',
-//   port: 5432,
-//   username: 'auvqxfggcijkft',
-//   password: '9a6aa9f5e9a822fbb69702b6984161272915b71babf15127a6a4da28f8d63199',
-//   database: 'dbkos2nh8rb4hu',
-//   models: [Users, Projects,UserProject],
-//   autoLoadModels: true,
-//   sync: {force: true}
-// }),
+//TypeOrmModule.forRoot({
+//       url:"postgres://evyevihhsiroyx:a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d@ec2-54-75-102-122.eu-west-1.compute.amazonaws.com:5432/d7q90pks25m0i6",
+//       type: 'postgres',
+//       host: 'ec2-54-75-102-122.eu-west-1.compute.amazonaws.com',
+//       port: 5432,
+//       username: 'evyevihhsiroyx',
+//       password: 'a2bd3f47d2c1326721aeb9a41775efb9468aa70e3a609a293a8fb331a1203f9d',
+//       database: 'd7q90pks25m0i6',
+//       entities: [
+//         Users, Projects,SessionControl
+//       ],
+//       synchronize: true,
+//       logging: false,
+//       autoLoadEntities: true,
+//       ssl: {
+//         rejectUnauthorized: false
+//       },
+//     }),
